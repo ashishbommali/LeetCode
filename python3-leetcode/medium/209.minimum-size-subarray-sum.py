@@ -12,34 +12,48 @@ class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:        
         min_length = float('inf')
         sum = beg = end = 0
-        for i in nums:
-            sum += i
+        # for i in nums:
+        #     sum += i
             
-            print("beg", beg,"end",end,"sum",sum)
-            if sum > target:
-                print("sum > target: before deduction", sum)
+        #     print("beg", beg,"end",end,"sum",sum)
+        #     if sum > target:
+        #         print("sum > target: before deduction", sum)
+        #         sum -= nums[beg]
+        #         beg += 1
+        #         print("sum > target: after deduction", sum, "beg", beg)
+            
+        #     if sum < target:
+        #         end += 1
+
+        #     print("beg", beg,"end",end)
+
+        #     if sum == target:
+        #         min_length = min(min_length, end-beg+1)
+        #         print("min_length", min_length)
+
+        # if sum == target:
+        #     return min_length    
+        
+        # elif:
+        #     return 0
+       
+        for end in range(len(nums)):
+            sum += nums[end]
+            #print(sum)
+            while sum >= target:
+                min_length = min(min_length, end - beg + 1)
                 sum -= nums[beg]
                 beg += 1
-                print("sum > target: after deduction", sum, "beg", beg)
-            
-            if sum < target:
-                end += 1
+                #print(min_length,sum,beg)
 
-            print("beg", beg,"end",end)
-
-            if sum == target:
-                min_length = min(min_length, end-beg+1)
-                print("min_length", min_length)
-
-        if sum == target:
-            return min_length    
-        
-        if sum != target:
+        if min_length == float('inf'):
             return 0
+        
+        return min_length
 
 # @lc code=end
 
-s = Solution()
-print(s.minSubArrayLen(7, [2,3,1,2,4,3]))
+# s = Solution()
+# print(s.minSubArrayLen(7, [2,3,1,2,4,3]))
 # print(s.minSubArrayLen(4, [1,4,4]))
 # print(s.minSubArrayLen(11, [1,1,1,1,1,1,1,1]))
